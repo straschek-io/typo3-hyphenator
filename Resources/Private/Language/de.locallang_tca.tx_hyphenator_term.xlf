@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0" xmlns:t3="http://typo3.org/schemas/xliff">
+    <file source-language="en" datatype="plaintext" original="messages" product-name="hyphenator">
+        <header/>
+        <body>
+            <trans-unit id="tx_hyphenator_term">
+                <target>Trennungs-Ausdruck</target>
+            </trans-unit>
+            <trans-unit id="from.label">
+                <target>Quell-Ausdruck</target>
+            </trans-unit>
+            <trans-unit id="from.description">
+                <target>Quell-Ausdruck (Groß-/Kleinschreibung beachten)</target>
+            </trans-unit>
+            <trans-unit id="to.label">
+                <target>Ausdruck mit Trennung</target>
+            </trans-unit>
+            <trans-unit id="to.description">
+                <target>Ausdruck mit Zeichen | ("pipe"), wo eine Trennung erfolgen soll</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

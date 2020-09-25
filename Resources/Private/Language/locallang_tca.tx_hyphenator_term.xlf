@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0" xmlns:t3="http://typo3.org/schemas/xliff">
+    <file source-language="en" datatype="plaintext" original="messages" product-name="hyphenator">
+        <header/>
+        <body>
+            <trans-unit id="tx_hyphenator_term">
+                <source>Hyphenator term</source>
+            </trans-unit>
+            <trans-unit id="from.label">
+                <source>Source term</source>
+            </trans-unit>
+            <trans-unit id="from.description">
+                <source>Insert the source term (case sensitive)</source>
+            </trans-unit>
+            <trans-unit id="to.label">
+                <source>Hyphenated term</source>
+            </trans-unit>
+            <trans-unit id="to.description">
+                <source>Insert term with | ("pipe") character(s) where hyphenation should be allowed</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
