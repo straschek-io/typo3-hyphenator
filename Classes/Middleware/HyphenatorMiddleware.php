@@ -30,12 +30,13 @@ final class HyphenatorMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $terms = $this->termRepository->fetchAll();
         $response = $handler->handle($request);
-        $output = $response->getBody()->__toString();
-        $parsedOutput = $this->parser->replace($terms, $output);
-        $response->getBody()->rewind();
-        $response->getBody()->write($parsedOutput);
+        if ($terms = $this->termRepository->fetchAll()) {
+            $output = $response->getBody()->__toString();
+            $parsedOutput = $this->parser->replace($terms, $output);
+            $response->getBody()->rewind();
+            $response->getBody()->write($parsedOutput);
+        }
         return $response;
     }
 }
