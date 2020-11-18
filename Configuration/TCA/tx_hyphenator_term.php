@@ -8,11 +8,11 @@ return [
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
         'delete' => 'deleted',
-        'title' => 'LLL:EXT:hyphenator/Resources/Private/Language/locallang_tca.tx_hyphenator_term.xlf:tx_hyphenator_term',
+        'title' => 'LLL:EXT:typo3_hyphenator/Resources/Private/Language/locallang_tca.tx_hyphenator_term.xlf:tx_hyphenator_term',
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:hyphenator/Resources/Public/Backend/Icons/tx_hyphenator_term.svg',
+        'iconfile' => 'EXT:typo3_hyphenator/Resources/Public/Backend/Icons/tx_hyphenator_term.svg',
         'searchFields' => 'from',
     ],
     'interface' => [
@@ -26,8 +26,8 @@ return [
             ],
         ],
         'from' => [
-            'label' => 'LLL:EXT:hyphenator/Resources/Private/Language/locallang_tca.tx_hyphenator_term.xlf:from.label',
-            'description' => 'LLL:EXT:hyphenator/Resources/Private/Language/locallang_tca.tx_hyphenator_term.xlf:from.description',
+            'label' => 'LLL:EXT:typo3_hyphenator/Resources/Private/Language/locallang_tca.tx_hyphenator_term.xlf:from.label',
+            'description' => 'LLL:EXT:typo3_hyphenator/Resources/Private/Language/locallang_tca.tx_hyphenator_term.xlf:from.description',
             'config' => [
                 'type' => 'input',
                 'size' => 50,
@@ -36,8 +36,8 @@ return [
             ],
         ],
         'to' => [
-            'label' => 'LLL:EXT:hyphenator/Resources/Private/Language/locallang_tca.tx_hyphenator_term.xlf:to.label',
-            'description' => 'LLL:EXT:hyphenator/Resources/Private/Language/locallang_tca.tx_hyphenator_term.xlf:to.description',
+            'label' => 'LLL:EXT:typo3_hyphenator/Resources/Private/Language/locallang_tca.tx_hyphenator_term.xlf:to.label',
+            'description' => 'LLL:EXT:typo3_hyphenator/Resources/Private/Language/locallang_tca.tx_hyphenator_term.xlf:to.description',
             'config' => [
                 'type' => 'input',
                 'size' => 50,
