@@ -15,10 +15,10 @@ So as a simple example, this extension allows you to NOT have break like this:
 > beiterunfallversicherungsgesetz
 
 > ... ... .. ..... Arbeiterun-  
-> unfallversicherungsgesetz
+> fallversicherungsgesetz
 
-> Arbeiterun-  
-> unfallver-  
+> Arbeiterun-       
+> fallver-  
 > sicherungsge-  
 > setz
 
