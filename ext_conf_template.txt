@@ -1,2 +1,2 @@
 #cat=basic;type=string;label=Regex for evaluation of replacement field in backend – add further characters if needed
-backendEvaluationRegex = /[^a-zA-Z0-9_-| ]/
+backendEvaluationRegex = /[^a-zA-Z0-9_-| äöüÄÖÜß]/
