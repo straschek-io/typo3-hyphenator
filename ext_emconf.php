@@ -8,10 +8,10 @@ $EM_CONF['typo3_hyphenator'] = [
     'author_email' => 'hallo@straschek.io',
     'state' => 'stable',
     'clearCacheOnLoad' => false,
-    'version' => '1.2.0',
+    'version' => '1.3.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '10.4.0-10.99.99',
+            'typo3' => '10.4.0-11.5.99',
         ],
     ],
 ];
