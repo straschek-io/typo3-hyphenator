@@ -9,6 +9,7 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use StraschekIo\Hyphenator\Parser\HyphenParser;
 use StraschekIo\Hyphenator\Repository\TermRepository;
+use TYPO3\CMS\Core\Http\StreamFactory;
 
 final class HyphenatorMiddleware implements MiddlewareInterface
 {
@@ -34,8 +35,10 @@ final class HyphenatorMiddleware implements MiddlewareInterface
         if ($terms = $this->termRepository->fetchAll()) {
             $output = $response->getBody()->__toString();
             $parsedOutput = $this->parser->replace($terms, $output);
-            $response->getBody()->rewind();
-            $response->getBody()->write($parsedOutput);
+            $stream = (new StreamFactory())->createStream($parsedOutput);
+            $response = $response
+                ->withBody($stream)
+                ->withoutHeader('Content-Length');
         }
         return $response;
     }
