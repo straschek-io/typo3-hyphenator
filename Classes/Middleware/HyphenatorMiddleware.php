@@ -13,33 +13,44 @@ use TYPO3\CMS\Core\Http\StreamFactory;
 
 final class HyphenatorMiddleware implements MiddlewareInterface
 {
-    /**
-     * @var TermRepository
-     */
-    private $termRepository;
-
-    /**
-     * @var HyphenParser
-     */
-    private $parser;
-
-    public function __construct(HyphenParser $parser, TermRepository $termRepository)
-    {
-        $this->termRepository = $termRepository;
-        $this->parser = $parser;
+    public function __construct(
+        private readonly HyphenParser $parser,
+        private readonly TermRepository $termRepository,
+    ) {
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $response = $handler->handle($request);
-        if ($terms = $this->termRepository->fetchAll()) {
-            $output = $response->getBody()->__toString();
-            $parsedOutput = $this->parser->replace($terms, $output);
-            $stream = (new StreamFactory())->createStream($parsedOutput);
-            $response = $response
-                ->withBody($stream)
-                ->withoutHeader('Content-Length');
+
+        if (!$this->isHtmlResponse($response)) {
+            return $response;
         }
-        return $response;
+
+        $terms = $this->termRepository->fetchAll();
+        if ($terms === []) {
+            return $response;
+        }
+
+        $body = (string) $response->getBody();
+        $parsedBody = $this->parser->replace($terms, $body);
+
+        if ($parsedBody === $body) {
+            return $response;
+        }
+
+        $stream = (new StreamFactory())->createStream($parsedBody);
+
+        return $response
+            ->withBody($stream)
+            ->withoutHeader('Content-Length');
+    }
+
+    private function isHtmlResponse(ResponseInterface $response): bool
+    {
+        return str_contains(
+            strtolower($response->getHeaderLine('Content-Type')),
+            'text/html'
+        );
     }
 }
