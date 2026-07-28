@@ -7,23 +7,36 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    name: tests (PHP ${{ matrix.php-version }}, TYPO3 ${{ matrix.typo3-version }})
     strategy:
       fail-fast: false
       matrix:
         php-version: ['8.2', '8.3', '8.4', '8.5']
+        typo3-version: ['^12.4', '^13.4', '^14.3']
+        exclude:
+          # TYPO3 12.4 officially supports PHP 8.1-8.3 only
+          - typo3-version: '^12.4'
+            php-version: '8.4'
+          - typo3-version: '^12.4'
+            php-version: '8.5'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
           coverage: none
+      - run: composer require "typo3/cms-core:${{ matrix.typo3-version }}" --no-update
+      # TYPO3 12.4 is past free security support; its packages carry open
+      # advisories and composer refuses them unless auditing is relaxed
+      - if: matrix.typo3-version == '^12.4'
+        run: composer config audit.block-insecure false
       - run: composer install --no-progress --no-interaction
       - run: vendor/bin/phpunit
 
   code-style:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
