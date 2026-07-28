@@ -58,19 +58,22 @@ sys folder to your liking.
 
 ## Good to know
 
-I tried several PHP based DOM parsers, but they all significantly suffered from complexity
-and performance issues.  
-
-The replacement now is implemented in a super simple way via `preg_replace()`. This may 
-and will not cover all cases. Maybe I failed on it, but this approach IMHO works best:   
-simple & fast.
-
-If you have improvement suggestions, [find the used regular expression on regex101.com](https://regex101.com/r/TqEXaV/1).   
-I am open to enhance this.
+- Replacement happens in a PSR-15 middleware and only touches `text/html` responses.
+  JSON, XML sitemaps and other content types pass through untouched.
+- The parser works in a single `preg_replace_callback()` pass over the rendered HTML.
+  Tags and their attributes, `<head>`, `<script>`, `<style>`, `<textarea>` and HTML
+  comments are never touched.
+- Terms are matched literally (no regular expressions in the "from" field) and must
+  start at a word boundary.
+- Prefix matching is intended behavior: a term like `Arbeit` also hyphenates the
+  beginning of `Arbeitsamt`. If several terms match, the longest one wins.
+- DOM-based parsing (libxml `DOMDocument`, `Masterminds\HTML5`) was evaluated and
+  benchmarked, but both were orders of magnitude slower than the single regex pass:
+  simple & fast still wins.
 
 ## Compatibility
 
-Compatible with TYPO3 10.4+   
+Compatible with TYPO3 12.4 and 13.4   
 Tested manually. No automated tests planned (so far).
 
 Works for me, may work for you.
