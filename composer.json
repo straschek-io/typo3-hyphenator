@@ -29,7 +29,12 @@
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3.75",
-    "phpunit/phpunit": "^10.5"
+    "phpunit/phpunit": "^10.5",
+    "typo3/cms-backend": "^12.4 | ^13.4 | ^14.3",
+    "typo3/cms-belog": "^12.4 | ^13.4 | ^14.3",
+    "typo3/cms-fluid-styled-content": "^12.4 | ^13.4 | ^14.3",
+    "typo3/cms-frontend": "^12.4 | ^13.4 | ^14.3",
+    "typo3/cms-install": "^12.4 | ^13.4 | ^14.3"
   },
   "scripts": {
     "cs": "php-cs-fixer fix --dry-run --diff",

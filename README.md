@@ -71,6 +71,17 @@ sys folder to your liking.
   benchmarked, but both were orders of magnitude slower than the single regex pass:
   simple & fast still wins.
 
+## Development
+
+```
+./Build/dev-setup.sh
+```
+
+Bootstraps a full TYPO3 dev instance (DDEV required) with a seeded test page,
+demo content and hyphenation terms.  
+Frontend: https://typo3-hyphenator.ddev.site/ — Backend: `/typo3` (`admin` / `Hyphenator14!`)  
+Run tests with `ddev composer test`, code style with `ddev composer cs`.
+
 ## Compatibility
 
 Compatible with TYPO3 12.4, 13.4 and 14.3   
