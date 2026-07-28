@@ -28,7 +28,7 @@ final class HyphenatorMiddleware implements MiddlewareInterface
         }
 
         $terms = $this->termRepository->fetchAll();
-        if ($terms === []) {
+        if (empty($terms)) {
             return $response;
         }
 
