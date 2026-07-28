@@ -1,0 +1,18 @@
+#!/bin/sh
+# Reject commits with code style violations in staged PHP files.
+# Activate once per clone: git config core.hooksPath .githooks
+
+staged=$(git diff --cached --name-only --diff-filter=ACM | grep -E '^(Classes|Tests)/.*\.php$')
+[ -z "$staged" ] && exit 0
+
+if ! command -v ddev >/dev/null 2>&1 || ! ddev describe >/dev/null 2>&1; then
+    echo "pre-commit: ddev not running, skipping php-cs-fixer check (CI will catch violations)"
+    exit 0
+fi
+
+# shellcheck disable=SC2086
+if ! ddev exec vendor/bin/php-cs-fixer fix --dry-run --diff --using-cache=no $staged; then
+    echo ""
+    echo "pre-commit: code style violations found. Run 'ddev composer cs:fix' and re-stage."
+    exit 1
+fi
