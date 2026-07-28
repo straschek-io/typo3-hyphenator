@@ -73,8 +73,8 @@ sys folder to your liking.
 
 ## Compatibility
 
-Compatible with TYPO3 12.4 and 13.4   
+Compatible with TYPO3 12.4, 13.4 and 14.3   
 Parser and middleware are covered by PHPUnit tests (`composer test`),
-running in CI on PHP 8.2 – 8.5.
+running in CI on PHP 8.2 – 8.5 against all three supported TYPO3 versions.
 
 Works for me, may work for you.

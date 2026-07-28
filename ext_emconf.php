@@ -7,10 +7,10 @@ $EM_CONF['typo3_hyphenator'] = [
     'author' => 'Michael Straschek',
     'author_email' => 'hallo@straschek.io',
     'state' => 'stable',
-    'version' => '1.6.0',
+    'version' => '1.7.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '12.4.0-13.4.99',
+            'typo3' => '12.4.0-14.3.99',
         ],
     ],
 ];
