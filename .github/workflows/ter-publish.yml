@@ -26,9 +26,18 @@ jobs:
         run: |
           TAG="${{ inputs.tag || github.ref_name }}"
           VERSION="${TAG#v}"
+          # Prefer the GitHub release notes as TER upload comment, then the
+          # tag annotation; the generic release line is only a fallback
+          NOTES="$(gh release view "$TAG" --json body --jq .body 2>/dev/null || true)"
+          if [ -z "$NOTES" ]; then
+            git fetch --force origin "refs/tags/$TAG:refs/tags/$TAG"
+            NOTES="$(git tag -l --format='%(contents)' "$TAG")"
+          fi
+          COMMENT="${NOTES:-Release $VERSION}"
+          COMMENT="$COMMENT — https://github.com/${{ github.repository }}/releases/tag/${TAG}"
           TAILOR="$(composer global config home)/vendor/bin/tailor"
           "$TAILOR" set-version "$VERSION"
-          "$TAILOR" ter:publish "$VERSION" typo3_hyphenator \
-            --comment "Release $VERSION — https://github.com/${{ github.repository }}/releases/tag/${TAG}"
+          "$TAILOR" ter:publish "$VERSION" typo3_hyphenator --comment "$COMMENT"
         env:
           TYPO3_API_TOKEN: ${{ secrets.TYPO3_API_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
