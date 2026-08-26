@@ -1,0 +1,10 @@
+/.ddev export-ignore
+/.editorconfig export-ignore
+/.gitattributes export-ignore
+/.githooks export-ignore
+/.github export-ignore
+/.gitignore export-ignore
+/.php-cs-fixer.dist.php export-ignore
+/Build export-ignore
+/Tests export-ignore
+/phpunit.xml.dist export-ignore
