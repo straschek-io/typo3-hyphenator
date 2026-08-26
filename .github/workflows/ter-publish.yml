@@ -1,0 +1,26 @@
+name: TER publish
+
+on:
+  push:
+    tags: ['v[0-9]+.[0-9]+.[0-9]+']
+
+jobs:
+  ter-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+      - name: Install tailor
+        run: composer global require typo3/tailor --no-progress --no-interaction
+      - name: Publish to TER
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          TAILOR="$(composer global config home)/vendor/bin/tailor"
+          "$TAILOR" set-version "$VERSION"
+          "$TAILOR" ter:publish "$VERSION" typo3_hyphenator \
+            --comment "Release $VERSION — https://github.com/${{ github.repository }}/releases/tag/${GITHUB_REF_NAME}"
+        env:
+          TYPO3_API_TOKEN: ${{ secrets.TYPO3_API_TOKEN }}
